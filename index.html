@@ -321,7 +321,7 @@
                     <div class="mt-8 pt-5 border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div class="text-center sm:text-left">
                             <span class="text-[10px] text-stone-400">Tarif par participant</span>
-                            <p class="text-lg font-bold text-[#5c1322]"><span id="circuit-price">1,250</span> TND <span class="text-xs text-stone-500 font-normal">/ tout inclus</span></p>
+                            <p class="text-lg font-bold text-[#5c1322]"><span id="circuit-price">1,500</span> TND <span class="text-xs text-stone-500 font-normal">/ tout inclus</span></p>
                         </div>
                         <button class="bg-[#5c1322] hover:bg-[#c3a267] active:bg-[#5c1322] text-white font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-xl transition-all shadow-md flex items-center gap-2 w-full sm:w-auto justify-center min-h-[48px]">
                             S'inscrire à ce circuit <i data-lucide="chevron-right" class="w-4 h-4"></i>
@@ -428,6 +428,35 @@
         </div>
     </section>
 
+    <!-- SECTION: ONLINE STORE -->
+    <section id="shop" class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto scroll-mt-16 md:scroll-mt-28">
+        <div class="text-center mb-8">
+            <span class="text-xs uppercase tracking-[0.3em] text-[#c3a267] font-bold">Boutique en ligne</span>
+            <h2 class="serif-title text-2xl md:text-3xl font-semibold text-[#5c1322] mt-2">Boutique Mixologie</h2>
+            <p class="text-stone-500 text-xs md:text-sm mt-3 max-w-2xl mx-auto">Retrouvez nos ustensiles, ingrédients et coffrets signatures pour prolonger l'expérience à la maison.</p>
+        </div>
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-2 gap-6 items-center">
+                <div class="rounded-2xl overflow-hidden bg-white border border-stone-200 p-4 flex items-center justify-center">
+                    <img src="1.jpg" alt="Produit 1" class="max-w-full h-auto object-contain">
+                </div>
+                <div class="rounded-2xl overflow-hidden bg-white border border-stone-200 p-4 flex items-center justify-center">
+                    <img src="2.jpg" alt="Produit 2" class="max-w-full h-auto object-contain">
+                </div>
+            </div>
+            <div class="mt-6 text-center">
+                <h3 class="font-bold text-lg text-[#5c1322]">Coffret Signature</h3>
+                <p class="text-sm text-stone-600 mt-2 max-w-2xl mx-auto">Un coffret complet pour réaliser nos cocktails signatures chez vous.</p>
+                <div class="mt-4 flex items-center justify-center gap-3">
+                    <a href="#" class="bg-[#5c1322] text-white font-semibold text-xs uppercase tracking-widest px-6 py-3 rounded-xl">Visiter la Boutique</a>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="text-sm text-stone-500 underline">Voir plus de produits</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SECTION 3: PARTNERS & COLLABORATIONS -->
     <section id="partners" class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto scroll-mt-16 md:scroll-mt-28">
         <div class="text-center mb-12">
@@ -438,7 +467,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 max-w-6xl mx-auto">
 
             <!-- Partner 1: ISETH Sidi Dhrif -->
             <div class="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-sm flex flex-col items-center text-center justify-between group hover:border-[#c3a267]/50 transition-all duration-300">
@@ -544,6 +573,32 @@
                 </div>
             </div>
 
+            <!-- Partner 9: Ministry of Tourism -->
+            <div class="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-sm flex flex-col items-center text-center justify-between group hover:border-[#c3a267]/50 transition-all duration-300">
+                <div class="w-full h-24 flex items-center justify-center p-2 mb-3 bg-[#faf6f0] rounded-xl overflow-hidden">
+                    <img src="ministry.png" alt="Ministry of Tourism" class="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <span class="hidden text-xs font-bold text-stone-500 uppercase">Ministry of Tourism</span>
+                </div>
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-stone-800 leading-tight">Ministère du Tourisme</h5>
+                    <p class="text-[9px] text-[#c3a267] font-semibold uppercase mt-0.5">Institution Institutionnelle</p>
+                    <p class="text-[10px] text-stone-500 mt-2 leading-relaxed hidden sm:block">Partenaire institutionnel en charge de la promotion touristique et du soutien aux industries traditionnelles, facilitant la valorisation des terroirs locaux.</p>
+                </div>
+            </div>
+
+            <!-- Partner 10: Miel Cannelle -->
+            <div class="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-sm flex flex-col items-center text-center justify-between group hover:border-[#c3a267]/50 transition-all duration-300">
+                <div class="w-full h-24 flex items-center justify-center p-2 mb-3 bg-[#faf6f0] rounded-xl overflow-hidden">
+                    <img src="miel cannelle.png" alt="Miel Cannelle" class="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <span class="hidden text-xs font-bold text-stone-500 uppercase">Miel Cannelle</span>
+                </div>
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-stone-800 leading-tight">Miel Cannelle</h5>
+                    <p class="text-[9px] text-[#c3a267] font-semibold uppercase mt-0.5">Producteur Apicole</p>
+                    <p class="text-[10px] text-stone-500 mt-2 leading-relaxed hidden sm:block">Producteur artisanal de miels et produits apicoles, engagé dans la valorisation des saveurs locales et des savoir-faire traditionnels.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -570,8 +625,10 @@
             </div>
         </div>
         <div class="max-w-7xl mx-auto border-t border-stone-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] md:text-xs text-stone-500">
-            <p>&copy; 2026 De la terre au verre. Tous droits réservés.</p>
+            <p>&copy; 2026 De la terre au verre. Tous droits réservés. </p>
+              <img src="signature.png" alt="Logo De la Terre au Verre" class="w-6 h-6 object-contain filter grayscale opacity-70" fill="white">
             <p>Conçu pour l'éveil des terroirs tunisiens.</p>
+
         </div>
     </footer>
 
@@ -703,7 +760,7 @@
                 signature: "ÉPICÉ – FLORAL – FRUITÉ",
                 subtitle: "Circuit 1",
                 desc: "Un voyage sensoriel reliant la richesse historique de la médina de Tunis, les vergers d'agrumes de Zaghouan, et les eaux florales artisanales de Testour.",
-                price: "1,250",
+                price: "1,500",
                 stops: [
                     { name: "Tunis", details: "Exploration de la médina, patrimoine vivant, effervescence urbaine." },
                     { name: "Zarouen / Zaghouan", details: "Immersion vergers d'agrumes, cueillette et distillation." },
@@ -729,7 +786,7 @@
                 signature: "ACIDE – FLORAL – FRAIS",
                 subtitle: "Circuit 2",
                 desc: "Un itinéraire d'exception bordé par la Méditerranée, célébrant les champs de jasmin, la fraîcheur des agrumes sauvages, et l'excellence viticole millénaire tunisienne.",
-                price: "1,400",
+                price: "1,500",
                 stops: [
                     { name: "Hammamet", details: "Cueillette des fleurs de jasmin et balade côtière parfumée." },
                     { name: "Nabeul", details: "Art ancestral de la distillation de fleur d'oranger amère (Néroli)." },
@@ -755,7 +812,7 @@
                 signature: "HERBACÉ – BOISÉ – BOTANIQUE",
                 subtitle: "Circuit 3",
                 desc: "Le Nord-Ouest tunisien déploie sa force tranquille entre montagnes brumeuses, forêts de chêne-liège, plantes aromatiques sauvages et miels forestiers uniques.",
-                price: "1,180",
+                price: "1,500",
                 stops: [
                     { name: "Béja", details: "Exploration de la richesse romaine et des terroirs herbagers réputés." },
                     { name: "Jendouba", details: "Aventures au cœur des forêts d'altitude et sources d'eau pures." },
@@ -781,7 +838,7 @@
                 signature: "SUCRÉ – RICHE – SOLAIRE",
                 subtitle: "Circuit 4",
                 desc: "Un retour aux sources du Sud saharien à l'ombre bienveillante des palmeraies géantes. Une ode aux dattes de qualité Deglet Nour, au safran du désert et à la douceur nomade.",
-                price: "1,650",
+                price: "1,500",
                 stops: [
                     { name: "Tozeur", details: "Architecture de briques d'argile, immersion dans une palmeraie impériale." },
                     { name: "Nefta", details: "Spiritualité saharienne, contemplation de la Corbeille de Nefta au couchant." },
