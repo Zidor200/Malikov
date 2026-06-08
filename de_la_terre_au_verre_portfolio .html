@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>De la terre au verre - Les Territoires du Goût</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fcfaf7;
+            color: #2c1a1d;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .serif-title {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Premium Colors */
+        .color-gold { color: #c3a267; }
+        .bg-gold { background-color: #c3a267; }
+        .border-gold { border-color: #c3a267; }
+
+        .color-burgundy { color: #5c1322; }
+        .bg-burgundy { background-color: #5c1322; }
+        .border-burgundy { border-color: #5c1322; }
+
+        /* Hide scrollbars but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Glassmorphism for mobile overlays */
+        .glass-panel {
+            background: rgba(252, 250, 247, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Prevent scroll leak when mobile menu is open */
+        .overflow-hidden-mobile {
+            @media (max-width: 767px) {
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden antialiased">
+
+    <!-- MOBILE STICKY NAVIGATION BAR (Only visible on mobile/tablet) -->
+    <div class="md:hidden fixed top-0 left-0 w-full z-50 glass-panel border-b border-stone-200/60 px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 bg-white rounded-full p-1 flex items-center justify-center border border-stone-200 overflow-hidden">
+                <img src="mainlogo.png" alt="De la terre au verre" class="w-full h-full object-contain">
+            </div>
+            <div>
+                <span class="serif-title text-sm font-bold tracking-wider block">De la terre au verre</span>
+                <span class="text-[7px] uppercase tracking-[0.2em] text-[#c3a267] block -mt-1">Les Territoires du Goût</span>
+            </div>
+        </div>
+        <button id="mobile-menu-toggle" aria-label="Toggle menu" class="w-11 h-11 flex items-center justify-center rounded-xl bg-[#5c1322]/5 text-[#5c1322] active:scale-95 transition-transform">
+            <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+        </button>
+    </div>
+
+    <!-- FULL SCREEN MOBILE DRAWER -->
+    <div id="mobile-drawer" class="fixed inset-0 z-40 bg-[#fcfaf7] pt-24 px-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+        <nav class="flex flex-col gap-6 mt-8">
+            <a href="#circuits" onclick="closeMobileMenu()" class="serif-title text-xl uppercase tracking-widest font-bold text-[#5c1322] py-3 border-b border-stone-200 flex items-center justify-between">
+                <span>Nos Circuits</span>
+                <i data-lucide="arrow-right" class="w-5 h-5 text-[#c3a267]"></i>
+            </a>
+            <a href="#experiences" onclick="closeMobileMenu()" class="serif-title text-xl uppercase tracking-widest font-bold text-[#5c1322] py-3 border-b border-stone-200 flex items-center justify-between">
+                <span>Expériences & Formations</span>
+                <i data-lucide="arrow-right" class="w-5 h-5 text-[#c3a267]"></i>
+            </a>
+            <a href="#partners" onclick="closeMobileMenu()" class="serif-title text-xl uppercase tracking-widest font-bold text-[#5c1322] py-3 border-b border-stone-200 flex items-center justify-between">
+                <span>Nos Partenaires</span>
+                <i data-lucide="arrow-right" class="w-5 h-5 text-[#c3a267]"></i>
+            </a>
+            <a href="#concept" onclick="closeMobileMenu()" class="serif-title text-xl uppercase tracking-widest font-bold text-[#5c1322] py-3 border-b border-stone-200 flex items-center justify-between">
+                <span>Philosophie</span>
+                <i data-lucide="arrow-right" class="w-5 h-5 text-[#c3a267]"></i>
+            </a>
+        </nav>
+        <div class="mb-12 border-t border-stone-200 pt-8 text-center">
+            <p class="text-xs text-stone-500 mb-4">Besoin d'un accompagnement personnalisé ?</p>
+            <a href="mailto:contact@delaterreauverre.tn" class="inline-block bg-[#5c1322] text-white font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-xl w-full">
+                Nous Contacter
+            </a>
+        </div>
+    </div>
+
+    <!-- DESKTOP STICKY/MORPHING HEADER (Hidden on mobile) -->
+    <header id="main-header" class="hidden md:block fixed top-0 left-0 w-full z-50 bg-[#fcfaf7]/95 backdrop-blur-md border-b border-stone-200/50 py-8 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center transition-all duration-500" id="header-container">
+
+            <div id="logo-wrapper" class="flex flex-col items-center text-center transform scale-100 origin-center mb-6 transition-all duration-500">
+                <div class="w-20 h-20 mb-3 bg-white rounded-full shadow-sm p-2 flex items-center justify-center border border-stone-200 overflow-hidden">
+                    <img src="mainlogo.png" alt="De la terre au verre" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <h1 class="serif-title text-xl md:text-2xl font-bold tracking-widest text-[#2c1a1d]">De la terre au verre</h1>
+                    <p class="text-[9px] uppercase tracking-[0.3em] text-[#c3a267] font-semibold mt-0.5">Les Territoires du Goût</p>
+                </div>
+            </div>
+
+            <nav id="nav-links" class="w-full flex justify-center gap-12 border-t border-stone-200/60 pt-4 transition-all duration-500">
+                <a href="#circuits" class="serif-title text-sm uppercase tracking-widest font-semibold text-[#5c1322] hover:text-[#c3a267] transition-colors relative group py-1">
+                    Nos Circuits
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c3a267] transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#experiences" class="serif-title text-sm uppercase tracking-widest font-semibold text-[#5c1322] hover:text-[#c3a267] transition-colors relative group py-1">
+                    Expériences & Formations
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c3a267] transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#partners" class="serif-title text-sm uppercase tracking-widest font-semibold text-[#5c1322] hover:text-[#c3a267] transition-colors relative group py-1">
+                    Nos Partenaires
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c3a267] transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#concept" class="serif-title text-sm uppercase tracking-widest font-semibold text-[#5c1322] hover:text-[#c3a267] transition-colors relative group py-1">
+                    Philosophie
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c3a267] transition-all group-hover:w-full"></span>
+                </a>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- SPACER (Compensates sticky header height smoothly across breakpoints) -->
+    <div id="header-spacer" class="h-[68px] md:h-[250px] transition-all duration-500"></div>
+
+    <!-- MISSION STATEMENT -->
+    <section id="concept" class="relative py-12 md:py-20 px-4 md:px-6 bg-[#f7f2ea] border-b border-stone-200 scroll-mt-20 md:scroll-mt-28">
+        <div class="max-w-5xl mx-auto text-center">
+            <span class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-[#c3a267] font-bold block mb-2">Un voyage sensoriel à travers la Tunisie</span>
+            <h2 class="serif-title text-2xl md:text-5xl font-semibold text-[#5c1322] leading-tight px-2">
+                De la Terre au Verre
+            </h2>
+            <p class="text-stone-600 max-w-3xl mx-auto leading-relaxed text-xs sm:text-sm md:text-lg mt-4 px-2">
+                Chaque territoire révèle ses produits, ses traditions et son identité à travers des expériences sensorielles immersives et des créations de mixologie uniques. Une valorisation sans précédent de nos produits phares et de l'artisanat d'excellence.
+            </p>
+
+            <!-- Features Grid (2 columns mobile, 4 columns desktop) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mt-10 md:mt-12 max-w-4xl mx-auto">
+                <div class="bg-[#fcfaf7] p-4 rounded-2xl shadow-sm border border-stone-200/60 flex flex-col items-center">
+                    <span class="p-2.5 bg-[#5c1322]/5 rounded-full text-[#5c1322] mb-2"><i data-lucide="map-pin" class="w-4 h-4 md:w-5 h-5"></i></span>
+                    <h4 class="font-bold text-[10px] md:text-xs uppercase tracking-wider text-stone-700">4 Régions</h4>
+                    <p class="text-[9px] md:text-[11px] text-stone-500 mt-0.5">Itinéraires sur mesure</p>
+                </div>
+                <div class="bg-[#fcfaf7] p-4 rounded-2xl shadow-sm border border-stone-200/60 flex flex-col items-center">
+                    <span class="p-2.5 bg-[#5c1322]/5 rounded-full text-[#5c1322] mb-2"><i data-lucide="sparkles" class="w-4 h-4 md:w-5 h-5"></i></span>
+                    <h4 class="font-bold text-[10px] md:text-xs uppercase tracking-wider text-stone-700">4 Signatures</h4>
+                    <p class="text-[9px] md:text-[11px] text-stone-500 mt-0.5">Créations mixologiques</p>
+                </div>
+                <div class="bg-[#fcfaf7] p-4 rounded-2xl shadow-sm border border-stone-200/60 flex flex-col items-center">
+                    <span class="p-2.5 bg-[#5c1322]/5 rounded-full text-[#5c1322] mb-2"><i data-lucide="users" class="w-4 h-4 md:w-5 h-5"></i></span>
+                    <h4 class="font-bold text-[10px] md:text-xs uppercase tracking-wider text-stone-700">Premium</h4>
+                    <p class="text-[9px] md:text-[11px] text-stone-500 mt-0.5">Max 15 participants</p>
+                </div>
+                <div class="bg-[#fcfaf7] p-4 rounded-2xl shadow-sm border border-stone-200/60 flex flex-col items-center">
+                    <span class="p-2.5 bg-[#5c1322]/5 rounded-full text-[#5c1322] mb-2"><i data-lucide="leaf" class="w-4 h-4 md:w-5 h-5"></i></span>
+                    <h4 class="font-bold text-[10px] md:text-xs uppercase tracking-wider text-stone-700">Durable</h4>
+                    <p class="text-[9px] md:text-[11px] text-stone-500 mt-0.5">Soutien éco-local</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 1: CIRCUITS EXPLORER -->
+    <section id="circuits" class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto scroll-mt-16 md:scroll-mt-28">
+        <div class="text-center mb-8 md:mb-12">
+            <span class="text-xs uppercase tracking-[0.3em] text-[#c3a267] font-bold">L'Aventure Mixologique</span>
+            <h2 class="serif-title text-2xl md:text-4xl font-semibold text-[#5c1322] mt-2">La Carte Sensorielle des Circuits</h2>
+            <p class="text-stone-500 text-xs md:text-sm mt-3 max-w-xl mx-auto">Choisissez une région pour explorer les terroirs, les activités immersives et les cocktails signatures conçus sur place.</p>
+        </div>
+
+        <!-- Circuit Selector Buttons with touch indicators -->
+        <div class="relative w-full mb-8 md:mb-12">
+            <div class="flex overflow-x-auto pb-3 gap-3 no-scrollbar px-1 snap-x snap-mandatory" id="scroll-container">
+                <button onclick="switchCircuit(1)" id="btn-circuit-1" class="circuit-btn active snap-start shrink-0 flex items-center gap-3 px-5 py-3.5 rounded-2xl border-2 border-stone-200 text-stone-600 hover:border-[#c3a267]/40 transition-all font-semibold text-xs uppercase tracking-wider min-h-[48px]">
+                    <span class="w-5 h-5 rounded-full bg-[#5c1322] text-white flex items-center justify-center text-[10px]">1</span>
+                    Tunis - Zaghouan - Testour
+                </button>
+                <button onclick="switchCircuit(2)" id="btn-circuit-2" class="circuit-btn snap-start shrink-0 flex items-center gap-3 px-5 py-3.5 rounded-2xl border-2 border-stone-200 text-stone-600 hover:border-[#c3a267]/40 transition-all font-semibold text-xs uppercase tracking-wider min-h-[48px]">
+                    <span class="w-5 h-5 rounded-full bg-[#5c1322]/20 text-stone-600 flex items-center justify-center text-[10px]">2</span>
+                    Cap Bon
+                </button>
+                <button onclick="switchCircuit(3)" id="btn-circuit-3" class="circuit-btn snap-start shrink-0 flex items-center gap-3 px-5 py-3.5 rounded-2xl border-2 border-stone-200 text-stone-600 hover:border-[#c3a267]/40 transition-all font-semibold text-xs uppercase tracking-wider min-h-[48px]">
+                    <span class="w-5 h-5 rounded-full bg-[#5c1322]/20 text-stone-600 flex items-center justify-center text-[10px]">3</span>
+                    Le Kef - Béja - Jendouba
+                </button>
+                <button onclick="switchCircuit(4)" id="btn-circuit-4" class="circuit-btn snap-start shrink-0 flex items-center gap-3 px-5 py-3.5 rounded-2xl border-2 border-stone-200 text-stone-600 hover:border-[#c3a267]/40 transition-all font-semibold text-xs uppercase tracking-wider min-h-[48px]">
+                    <span class="w-5 h-5 rounded-full bg-[#5c1322]/20 text-stone-600 flex items-center justify-center text-[10px]">4</span>
+                    Tozeur - Nefta
+                </button>
+            </div>
+            <!-- Visual mask indicator pointing to overflow scroll -->
+            <div class="pointer-events-none absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-[#fcfaf7] via-[#fcfaf7]/70 to-transparent md:hidden"></div>
+        </div>
+
+        <!-- Circuit Content Card -->
+        <div class="bg-white rounded-3xl border border-stone-200 shadow-lg overflow-hidden transition-all duration-300" id="circuit-card">
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+
+                <!-- Left Details Panel -->
+                <div class="lg:col-span-5 bg-[#faf6f0] p-6 md:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-stone-200">
+                    <div>
+                        <span id="circuit-signature" class="inline-block text-[10px] uppercase tracking-widest bg-[#5c1322]/10 text-[#5c1322] font-bold px-3 py-1 rounded-full mb-4">ÉPICÉ – FLORAL – FRUITÉ</span>
+                        <h3 id="circuit-title" class="serif-title text-2xl md:text-3xl font-bold text-[#5c1322] leading-tight">Tunis - Zaghouan - Testour</h3>
+                        <p id="circuit-subtitle" class="text-[10px] uppercase tracking-widest text-[#c3a267] font-semibold mt-1">Circuit 1</p>
+
+                        <p id="circuit-desc" class="text-stone-600 text-xs md:text-sm mt-5 leading-relaxed">
+                            Un voyage sensoriel reliant la richesse historique de la médina de Tunis, les vergers d'agrumes de Zaghouan, et les eaux florales artisanales de Testour.
+                        </p>
+                    </div>
+
+                    <!-- Schematic Route Graphic (Stops) -->
+                    <div class="mt-8 mb-6 bg-white/70 p-5 rounded-2xl border border-stone-200/50">
+                        <h4 class="text-xs uppercase tracking-wider font-bold text-stone-700 mb-4 flex items-center gap-2">
+                            <i data-lucide="navigation" class="w-4 h-4 text-[#c3a267]"></i> Itinéraire & Arrêts Clés
+                        </h4>
+                        <div class="relative pl-6 border-l-2 border-dashed border-[#c3a267]/40 space-y-4" id="circuit-stops">
+                            <div class="relative">
+                                <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-[#5c1322] border-4 border-white"></span>
+                                <h5 class="font-bold text-xs text-stone-800 uppercase tracking-wider">Tunis</h5>
+                                <p class="text-[10px] md:text-[11px] text-stone-500">Exploration de la médina, patrimoine vivant, effervescence urbaine.</p>
+                            </div>
+                            <div class="relative">
+                                <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-[#c3a267] border-4 border-white"></span>
+                                <h5 class="font-bold text-xs text-stone-800 uppercase tracking-wider">Zarouen / Zaghouan</h5>
+                                <p class="text-[10px] md:text-[11px] text-stone-500">Immersion vergers d'agrumes, cueillette et distillation.</p>
+                            </div>
+                            <div class="relative">
+                                <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-[#c3a267] border-4 border-white"></span>
+                                <h5 class="font-bold text-xs text-stone-800 uppercase tracking-wider">Testour</h5>
+                                <p class="text-[10px] md:text-[11px] text-stone-500">Dégustation de cocktails artisanaux à la grenade et eau de fleur d'oranger.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile-friendly details row -->
+                    <div class="flex items-center justify-between border-t border-stone-200/60 pt-5 text-[11px] md:text-xs">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="clock" class="w-4 h-4 text-[#c3a267]"></i>
+                            <span class="font-semibold text-stone-600">Durée: 3 Jours / 2 Nuits</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="users" class="w-4 h-4 text-[#c3a267]"></i>
+                            <span class="font-semibold text-stone-600">Max 15 pers.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Experience Panel -->
+                <div class="lg:col-span-7 p-6 md:p-12 flex flex-col justify-between">
+                    <div>
+                        <h4 class="serif-title text-base md:text-lg font-bold text-[#5c1322] border-b border-stone-200 pb-3 mb-6 flex items-center justify-between">
+                            <span>L'Expérience Mixologie</span>
+                            <span class="text-[10px] uppercase tracking-widest text-[#c3a267]">Signature</span>
+                        </h4>
+
+                        <!-- Cocktail Showcase Card -->
+                        <div class="bg-[#faf6f0] p-5 rounded-2xl border border-stone-200/50 flex flex-col sm:flex-row gap-5 items-center mb-6">
+                            <!-- Art glass container -->
+                            <div class="w-24 h-36 bg-white rounded-xl border border-stone-200 flex items-center justify-center p-2 relative shadow-inner shrink-0" id="cocktail-art-container">
+                                <div class="relative w-full h-full flex flex-col items-center justify-end">
+                                    <div class="w-20 h-20 rounded-b-full border-t border-[#c3a267] relative overflow-hidden flex items-end justify-center bg-stone-50" style="clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);">
+                                        <div class="w-full bg-[#5c1322] opacity-80" style="height: 65%;"></div>
+                                    </div>
+                                    <div class="w-1.5 h-10 bg-[#c3a267]"></div>
+                                    <div class="w-12 h-1 bg-[#c3a267] rounded-full"></div>
+                                    <div class="absolute top-10 right-2 w-6 h-6 rounded-full border-2 border-amber-500 bg-amber-400/50 transform rotate-45 overflow-hidden flex items-center justify-center">
+                                        <div class="w-full h-0.5 bg-amber-600"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center sm:text-left">
+                                <span class="text-[9px] uppercase tracking-widest font-bold text-stone-400">Cocktail Phare</span>
+                                <h5 id="cocktail-name" class="serif-title text-lg font-bold text-[#5c1322] mt-0.5">Le Grenade Sacrée</h5>
+                                <p id="cocktail-flavor-profile" class="text-[11px] font-semibold text-[#c3a267] mt-0.5">Profil: Épicé, Doux, Aromatique</p>
+
+                                <div class="mt-3">
+                                    <h6 class="text-[10px] uppercase tracking-wider font-bold text-stone-700">Ingrédients:</h6>
+                                    <p id="cocktail-ingredients" class="text-xs text-stone-600 mt-0.5">Grenade de Testour fraîchement pressée, sirop d'eau de fleur d'oranger distillée, zestes d'agrumes sauvages, touche d'épices douces.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Highlights List -->
+                        <h4 class="serif-title text-xs font-bold text-[#5c1322] mb-3">Activités Immersives</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="experience-highlights">
+                            <div class="flex gap-2.5 items-start p-2.5 rounded-xl hover:bg-[#faf6f0] transition-colors">
+                                <span class="text-[#c3a267] shrink-0 mt-0.5"><i data-lucide="check-circle-2" class="w-4 h-4"></i></span>
+                                <div>
+                                    <h6 class="font-bold text-xs text-stone-800 uppercase tracking-wider leading-tight">Atelier Eau de Fleur d'Oranger</h6>
+                                    <p class="text-[10px] text-stone-500 mt-0.5">Distillation traditionnelle dans les alambics de Testour.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2.5 items-start p-2.5 rounded-xl hover:bg-[#faf6f0] transition-colors">
+                                <span class="text-[#c3a267] shrink-0 mt-0.5"><i data-lucide="check-circle-2" class="w-4 h-4"></i></span>
+                                <div>
+                                    <h6 class="font-bold text-xs text-stone-800 uppercase tracking-wider leading-tight">Dégustation Privée en Domaine</h6>
+                                    <p class="text-[10px] text-stone-500 mt-0.5">Accords verger, fromages de brebis locaux et mixologie.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile registration area with tap-friendly button height -->
+                    <div class="mt-8 pt-5 border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="text-center sm:text-left">
+                            <span class="text-[10px] text-stone-400">Tarif par participant</span>
+                            <p class="text-lg font-bold text-[#5c1322]"><span id="circuit-price">1,250</span> TND <span class="text-xs text-stone-500 font-normal">/ tout inclus</span></p>
+                        </div>
+                        <button class="bg-[#5c1322] hover:bg-[#c3a267] active:bg-[#5c1322] text-white font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-xl transition-all shadow-md flex items-center gap-2 w-full sm:w-auto justify-center min-h-[48px]">
+                            S'inscrire à ce circuit <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: EVENTS & TRAINING -->
+    <section id="experiences" class="bg-[#faf6f0] py-16 md:py-24 px-4 md:px-6 border-t border-b border-stone-200 scroll-mt-16 md:scroll-mt-28">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-[#c3a267] font-bold">Transmission & Événementiel</span>
+                <h2 class="serif-title text-2xl md:text-4xl font-semibold text-[#5c1322] mt-2">Événements Prévus & Formations</h2>
+                <p class="text-stone-500 text-xs md:text-sm mt-3 max-w-xl mx-auto">Nous croyons à l'élargissement de l'écosystème à travers des masterclasses grand public et des certifications professionnelles.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+
+                <!-- Training Academy -->
+                <div class="bg-white p-6 md:p-10 rounded-3xl border border-stone-200 shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="p-3 bg-[#c3a267]/10 rounded-2xl text-[#c3a267]"><i data-lucide="graduation-cap" class="w-6 h-6 md:w-8 h-8"></i></span>
+                            <span class="text-[9px] md:text-xs font-bold uppercase tracking-widest bg-stone-100 text-stone-500 px-3 py-1 rounded-full">Académie</span>
+                        </div>
+                        <h3 class="serif-title text-xl md:text-2xl font-bold text-[#5c1322] mb-3">Formation Mixologie & Terroir</h3>
+                        <p class="text-stone-600 text-xs md:text-sm leading-relaxed mb-5">
+                            Un programme certifiant d'excellence destiné aux professionnels de la restauration tunisienne et internationale, ainsi qu'aux passionnés exigeants.
+                        </p>
+
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start gap-2.5 text-stone-600 text-xs md:text-sm">
+                                <span class="text-[#c3a267] shrink-0 mt-0.5"><i data-lucide="check" class="w-4 h-4"></i></span>
+                                <div>
+                                    <strong class="text-stone-800">Technique d'hydrolats :</strong> Maîtrise des alambics modernes et traditionnels.
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-2.5 text-stone-600 text-xs md:text-sm">
+                                <span class="text-[#c3a267] shrink-0 mt-0.5"><i data-lucide="check" class="w-4 h-4"></i></span>
+                                <div>
+                                    <strong class="text-stone-800">Équilibres acides/sucres :</strong> Remplacer le sucre par des réductions de miels forestiers et figues de barbarie.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="border-t border-stone-100 pt-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div>
+                            <span class="text-[9px] uppercase tracking-wider text-stone-400 block">Prochaine session</span>
+                            <p class="text-[11px] font-bold text-[#5c1322]">Octobre 2026 — Tunis (30h)</p>
+                        </div>
+                        <button class="border-2 border-[#5c1322] hover:bg-[#5c1322] hover:text-white text-[#5c1322] font-semibold text-xs uppercase tracking-widest px-6 py-3.5 rounded-xl transition-all w-full sm:w-auto text-center min-h-[48px]">
+                            Brochure Formation
+                        </button>
+                    </div>
+                </div>
+
+                <!-- NEW Privatization & Custom Events Booking Card -->
+                <div class="bg-white p-6 md:p-10 rounded-3xl border border-stone-200 shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="p-3 bg-[#5c1322]/10 rounded-2xl text-[#5c1322]"><i data-lucide="sparkles" class="w-6 h-6 md:w-8 h-8"></i></span>
+                            <span class="text-[9px] md:text-xs font-bold uppercase tracking-widest bg-[#5c1322]/10 text-[#5c1322] px-3 py-1 rounded-full">Privatisation</span>
+                        </div>
+                        <h3 class="serif-title text-xl md:text-2xl font-bold text-[#5c1322] mb-3">Événements Privés & Sur Mesure</h3>
+                        <p class="text-stone-600 text-xs md:text-sm leading-relaxed mb-5">
+                            Sublimez vos célébrations avec un bar éphémère de mixologie d'art. Nous concevons des signatures sensorielles sur-mesure adaptées à votre thème, mariant la noblesse du terroir à la rigueur d’exécution internationale.
+                        </p>
+
+                        <!-- Event Categories Interactive Tab Panel -->
+                        <div class="grid grid-cols-3 gap-2 p-1.5 bg-stone-100 rounded-xl mb-6">
+                            <button onclick="toggleEventType('mariage')" id="btn-type-mariage" class="event-type-btn active bg-white text-[#5c1322] font-bold text-[10px] md:text-xs uppercase tracking-wider py-2.5 rounded-lg shadow-sm transition-all">
+                                Mariage
+                            </button>
+                            <button onclick="toggleEventType('corporate')" id="btn-type-corporate" class="event-type-btn text-stone-600 font-semibold text-[10px] md:text-xs uppercase tracking-wider py-2.5 rounded-lg transition-all">
+                                Corporate
+                            </button>
+                            <button onclick="toggleEventType('prive')" id="btn-type-prive" class="event-type-btn text-stone-600 font-semibold text-[10px] md:text-xs uppercase tracking-wider py-2.5 rounded-lg transition-all">
+                                Soirée Privée
+                            </button>
+                        </div>
+
+                        <!-- Dynamic Offer Details -->
+                        <div id="event-offer-display" class="bg-[#faf6f0] p-4 rounded-xl border border-stone-200/50 mb-6 transition-all duration-300">
+                            <h4 id="event-offer-title" class="font-bold text-xs text-[#5c1322] uppercase tracking-wider">Mariages d'Exception & Fiançailles</h4>
+                            <p id="event-offer-desc" class="text-[11px] text-stone-600 mt-1.5 leading-relaxed">
+                                Un bar haut de gamme sculptural et une équipe de barmans dédiés. Création d'une boisson signature "Mariés" exclusive, utilisant les hydrolats de fleurs de notre terroir (jasmin, néroli) et des fruits de saison de nos domaines.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-stone-100 pt-5">
+                        <a href="mailto:contact@delaterreauverre.tn?subject=Demande%20de%20Privatisation" class="bg-[#5c1322] hover:bg-[#c3a267] active:bg-[#5c1322] text-white font-semibold text-xs uppercase tracking-widest px-6 py-4 rounded-xl transition-all w-full text-center min-h-[48px] flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-4 h-4"></i> Demander un devis sur mesure
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PARTNERS & COLLABORATIONS -->
+    <section id="partners" class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto scroll-mt-16 md:scroll-mt-28">
+        <div class="text-center mb-12">
+            <span class="text-xs uppercase tracking-[0.3em] text-[#c3a267] font-bold">L'Écosystème d'Excellence</span>
+            <h2 class="serif-title text-2xl md:text-3xl font-semibold text-[#5c1322] mt-2">Partenariats & Collaborations Officielles</h2>
+            <p class="text-stone-500 text-xs md:text-sm mt-3 max-w-2xl mx-auto">
+                Nous unissons nos forces avec les institutions hôtelières les plus réputées, des vignerons d'exception, des acteurs majeurs du voyage en Tunisie et des experts de l'art du bar.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
+
+            <!-- Partner 1: ISETH Sidi Dhrif -->
+            <div class="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-sm flex flex-col items-center text-center justify-between group hover:border-[#c3a267]/50 transition-all duration-300">
+                <div class="w-full h-24 flex items-center justify-center p-2 mb-3 bg-[#faf6f0] rounded-xl overflow-hidden">
+                    <img src="logoiseth.png" alt="ISETH Sidi Dhrif" class="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <span class="hidden text-xs font-bold text-stone-500 uppercase">ISETH Sidi Dhrif</span>
+                </div>
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-stone-800 leading-tight">ISETH Sidi Dhrif</h5>
+                    <p class="text-[9px] text-[#c3a267] font-semibold uppercase mt-0.5">Accréditation & Formation</p>
+                    <p class="text-[10px] text-stone-500 mt-2 leading-relaxed hidden sm:block">Partenaire académique officiel certifiant nos masterclasses de mixologie.</p>
+                </div>
+            </div>
+
+            <!-- Partner 2: Malikov Drinks -->
+            <div class="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-sm flex flex-col items-center text-center justify-between group hover:border-[#c3a267]/50 transition-all duration-300">
+                <div class="w-full h-24 flex items-center justify-center p-2 mb-3 bg-[#faf6f0] rounded-xl overflow-hidden">
+                    <img src="malikov.png" alt="Malikov Drinks" class="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <span class="hidden text-xs font-bold text-stone-500 uppercase">Malikov Drinks</span>
+                </div>
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-stone-800 leading-tight">Malikov Drinks</h5>
+                    <p class="text-[9px] text-[#c3a267] font-semibold uppercase mt-0.5">Ingénierie & Services Bar</p>
+                    <p class="text-[10px] text-stone-500 mt-2 leading-relaxed hidden sm:block">Co-création des cartes signatures et logistique des ateliers mobiles.</p>
+                </div>
+            </div>
+
+            <!-- Partner 3: Kurubis -->
+            <div class="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-sm flex flex-col items-center text-center justify-between group hover:border-[#c3a267]/50 transition-all duration-300">
+                <div class="w-full h-24 flex items-center justify-center p-2 mb-3 bg-[#faf6f0] rounded-xl overflow-hidden">
+                    <img src="kurubis.png" alt="Kurubis" class="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <span class="hidden text-xs font-bold text-stone-500 uppercase">Kurubis</span>
+                </div>
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-stone-800 leading-tight">Kurubis</h5>
+                    <p class="text-[9px] text-[#c3a267] font-semibold uppercase mt-0.5">Vignobles d'Exception</p>
+                    <p class="text-[10px] text-stone-500 mt-2 leading-relaxed hidden sm:block">Domaine hôte et fournisseur exclusif de vins fins du Cap Bon.</p>
+                </div>
+            </div>
+
+            <!-- Partner 4: Vins Bou Argoub (VBA) -->
+            <div class="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-sm flex flex-col items-center text-center justify-between group hover:border-[#c3a267]/50 transition-all duration-300">
+                <div class="w-full h-24 flex items-center justify-center p-2 mb-3 bg-[#faf6f0] rounded-xl overflow-hidden">
+                    <img src="VBA.png" alt="Vins Bou Argoub" class="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <span class="hidden text-xs font-bold text-stone-500 uppercase">VBA</span>
+                </div>
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-stone-800 leading-tight">VBA (Bou Argoub)</h5>
+                    <p class="text-[9px] text-[#c3a267] font-semibold uppercase mt-0.5">Patrimoine Viticole</p>
+                    <p class="text-[10px] text-stone-500 mt-2 leading-relaxed hidden sm:block">Partenaire historique depuis 1947 valorisant les terroirs de Tunisie.</p>
+                </div>
+            </div>
+
+            <!-- Partner 5: TunRooms -->
+            <div class="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-sm flex flex-col items-center text-center justify-between group hover:border-[#c3a267]/50 transition-all duration-300">
+                <div class="w-full h-24 flex items-center justify-center p-2 mb-3 bg-[#faf6f0] rounded-xl overflow-hidden">
+                    <img src="logo.png" alt="TunRooms" class="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <span class="hidden text-xs font-bold text-stone-500 uppercase">TunRooms</span>
+                </div>
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-stone-800 leading-tight">TunRooms</h5>
+                    <p class="text-[9px] text-[#c3a267] font-semibold uppercase mt-0.5">Maisons d'Hôtes & Stays</p>
+                    <p class="text-[10px] text-stone-500 mt-2 leading-relaxed hidden sm:block">Hébergements premiums et gîtes insolites au cœur de nos circuits.</p>
+                </div>
+            </div>
+
+            <!-- Partner 6: TravelTodo -->
+            <div class="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-sm flex flex-col items-center text-center justify-between group hover:border-[#c3a267]/50 transition-all duration-300">
+                <div class="w-full h-24 flex items-center justify-center p-2 mb-3 bg-[#faf6f0] rounded-xl overflow-hidden">
+                    <img src="travel todo.png" alt="TravelTodo" class="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <span class="hidden text-xs font-bold text-stone-500 uppercase">TravelTodo</span>
+                </div>
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-stone-800 leading-tight">TravelTodo</h5>
+                    <p class="text-[9px] text-[#c3a267] font-semibold uppercase mt-0.5">Réseau de Distribution</p>
+                    <p class="text-[10px] text-stone-500 mt-2 leading-relaxed hidden sm:block">Partenaire de Splendid Tour facilitant la réservation grand public.</p>
+                </div>
+            </div>
+
+            <!-- Partner 7: Anax Travel & Events -->
+            <div class="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-sm flex flex-col items-center text-center justify-between group hover:border-[#c3a267]/50 transition-all duration-300">
+                <div class="w-full h-24 flex items-center justify-center p-2 mb-3 bg-[#faf6f0] rounded-xl overflow-hidden">
+                    <img src="anax.png" alt="Anax Travel & Events" class="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <span class="hidden text-xs font-bold text-stone-500 uppercase">Anax Travel</span>
+                </div>
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-stone-800 leading-tight">Anax Travel & Events</h5>
+                    <p class="text-[9px] text-[#c3a267] font-semibold uppercase mt-0.5">Catégorie A - Logistique</p>
+                    <p class="text-[10px] text-stone-500 mt-2 leading-relaxed hidden sm:block">Coordination de groupes d'affaires premiums et MICE.</p>
+                </div>
+            </div>
+
+            <!-- Partner 8: Aval Voyages -->
+            <div class="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-sm flex flex-col items-center text-center justify-between group hover:border-[#c3a267]/50 transition-all duration-300">
+                <div class="w-full h-24 flex items-center justify-center p-2 mb-3 bg-[#faf6f0] rounded-xl overflow-hidden">
+                    <img src="Aval.png" alt="Aval Voyages" class="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <span class="hidden text-xs font-bold text-stone-500 uppercase">Aval Voyages</span>
+                </div>
+                <div>
+                    <h5 class="font-bold text-xs uppercase tracking-wider text-stone-800 leading-tight">Aval Voyages</h5>
+                    <p class="text-[9px] text-[#c3a267] font-semibold uppercase mt-0.5">Circuits & Transport</p>
+                    <p class="text-[10px] text-stone-500 mt-2 leading-relaxed hidden sm:block">Opérateur d'excursions locales et logistique d'expédition Sahara.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#2c1a1d] text-stone-300 py-12 md:py-16 px-4 md:px-6 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8">
+            <div>
+                <h3 class="serif-title text-base md:text-lg font-bold text-white mb-3">De la Terre au Verre</h3>
+                <p class="text-xs text-stone-400 leading-relaxed max-w-xs">
+                    Un concept de tourisme expérientiel mixologique promouvant les terroirs uniques de la Tunisie.
+                </p>
+            </div>
+            <div>
+                <h4 class="serif-title text-xs font-bold text-white mb-3 uppercase tracking-wider">Navigation</h4>
+                <ul class="space-y-1.5 text-xs text-stone-400">
+                    <li><a href="#circuits" class="hover:text-[#c3a267] transition-colors">Nos Circuits</a></li>
+                    <li><a href="#experiences" class="hover:text-[#c3a267] transition-colors">Masterclasses</a></li>
+                    <li><a href="#partners" class="hover:text-[#c3a267] transition-colors">Partenaires</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="serif-title text-xs font-bold text-white mb-3 uppercase tracking-wider">Renseignements</h4>
+                <a href="mailto:contact@delaterreauverre.tn" class="text-xs font-bold text-[#c3a267] hover:underline block">test@delaterreauverre.tn</a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-stone-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] md:text-xs text-stone-500">
+            <p>&copy; 2026 De la terre au verre. Tous droits réservés.</p>
+            <p>Conçu pour l'éveil des terroirs tunisiens.</p>
+        </div>
+    </footer>
+
+    <!-- Script for mobile menu, scroll mechanics, and content toggling -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Menu Drawer Controls
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        const menuIcon = document.getElementById('menu-icon');
+        const body = document.body;
+
+        mobileMenuToggle.addEventListener('click', () => {
+            const isOpen = mobileDrawer.classList.contains('translate-x-0');
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        });
+
+        function openMobileMenu() {
+            mobileDrawer.classList.remove('translate-x-full');
+            mobileDrawer.classList.add('translate-x-0');
+            body.classList.add('overflow-hidden-mobile');
+            menuIcon.setAttribute('data-lucide', 'x');
+            lucide.createIcons();
+        }
+
+        function closeMobileMenu() {
+            mobileDrawer.classList.remove('translate-x-0');
+            mobileDrawer.classList.add('translate-x-full');
+            body.classList.remove('overflow-hidden-mobile');
+            menuIcon.setAttribute('data-lucide', 'menu');
+            lucide.createIcons();
+        }
+
+        // Desktop Morphing Header Logic
+        const header = document.getElementById('main-header');
+        const headerContainer = document.getElementById('header-container');
+        const logoWrapper = document.getElementById('logo-wrapper');
+        const navLinks = document.getElementById('nav-links');
+        const spacer = document.getElementById('header-spacer');
+
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth >= 768) { // Only run morph on desktop
+                if (window.scrollY > 100) {
+                    header.classList.remove('py-8');
+                    header.classList.add('py-3', 'shadow-md');
+
+                    headerContainer.classList.remove('flex-col', 'items-center', 'justify-center');
+                    headerContainer.classList.add('flex-row', 'justify-between', 'items-center');
+
+                    logoWrapper.classList.remove('mb-6', 'scale-100');
+                    logoWrapper.classList.add('flex-row', 'gap-4', 'scale-90', 'mb-0');
+
+                    const logoSubText = logoWrapper.querySelector('p');
+                    if (logoSubText) logoSubText.classList.add('hidden');
+
+                    navLinks.classList.remove('border-t', 'pt-4', 'w-full', 'justify-center');
+                    navLinks.classList.add('w-auto', 'justify-end');
+
+                    spacer.style.height = '140px';
+                } else {
+                    header.classList.remove('py-3', 'shadow-md');
+                    header.classList.add('py-8');
+
+                    headerContainer.classList.remove('flex-row', 'justify-between', 'items-center');
+                    headerContainer.classList.add('flex-col', 'items-center', 'justify-center');
+
+                    logoWrapper.classList.remove('flex-row', 'gap-4', 'scale-90', 'mb-0');
+                    logoWrapper.classList.add('mb-6', 'scale-100');
+
+                    const logoSubText = logoWrapper.querySelector('p');
+                    if (logoSubText) logoSubText.classList.remove('hidden');
+
+                    navLinks.classList.remove('w-auto', 'justify-end');
+                    navLinks.classList.add('border-t', 'pt-4', 'w-full', 'justify-center');
+
+                    spacer.style.height = '250px';
+                }
+            }
+        });
+
+        // Event Type Toggle Logic for Privatisation Card
+        const eventOffers = {
+            mariage: {
+                title: "Mariages d'Exception & Fiançailles",
+                desc: "Un bar haut de gamme sculptural et une équipe de barmans dédiés. Création d'une boisson signature 'Mariés' exclusive, utilisant les hydrolats de fleurs de notre terroir (jasmin, néroli) et des fruits de saison de nos domaines."
+            },
+            corporate: {
+                title: "Événements Corporate & Team Building",
+                desc: "Offrez à vos collaborateurs une masterclass active ou un bar de gala éco-conçu. Parfait pour les lancements de produits premiums, les galas ou les dîners d'affaires nécessitant une signature de marque forte et mémorable."
+            },
+            prive: {
+                title: "Anniversaires & Soirées Privées en Domaine",
+                desc: "Privatisez nos structures mobiles de mixologie dans des villas de luxe, yachts ou domaines partenaires. Nous concevons un parcours de dégustation sur mesure avec verrerie artisanale et accords de petites bouchées locales."
+            }
+        };
+
+        function toggleEventType(type) {
+            // Update Buttons State
+            document.querySelectorAll('.event-type-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-white', 'text-[#5c1322]', 'font-bold');
+                btn.classList.add('text-stone-600', 'font-semibold');
+            });
+
+            const activeBtn = document.getElementById(`btn-type-${type}`);
+            activeBtn.classList.add('active', 'bg-white', 'text-[#5c1322]', 'font-bold');
+            activeBtn.classList.remove('text-stone-600', 'font-semibold');
+
+            // Update content with brief smooth fade effect
+            const displayPanel = document.getElementById('event-offer-display');
+            displayPanel.style.opacity = '0.4';
+
+            setTimeout(() => {
+                document.getElementById('event-offer-title').innerText = eventOffers[type].title;
+                document.getElementById('event-offer-desc').innerText = eventOffers[type].desc;
+                displayPanel.style.opacity = '1';
+            }, 150);
+        }
+
+        // Dynamic Circuit Data Store
+        const circuitData = {
+            1: {
+                title: "Tunis - Zaghouan - Testour",
+                signature: "ÉPICÉ – FLORAL – FRUITÉ",
+                subtitle: "Circuit 1",
+                desc: "Un voyage sensoriel reliant la richesse historique de la médina de Tunis, les vergers d'agrumes de Zaghouan, et les eaux florales artisanales de Testour.",
+                price: "1,250",
+                stops: [
+                    { name: "Tunis", details: "Exploration de la médina, patrimoine vivant, effervescence urbaine." },
+                    { name: "Zarouen / Zaghouan", details: "Immersion vergers d'agrumes, cueillette et distillation." },
+                    { name: "Testour", details: "Dégustation de cocktails artisanaux à la grenade et eau de fleur d'oranger." }
+                ],
+                cocktail: {
+                    name: "Le Grenade Sacrée",
+                    profile: "Profil: Épicé, Doux, Aromatique",
+                    ingredients: "Grenade de Testour fraîchement pressée, sirop d'eau de fleur d'oranger distillée, zestes d'agrumes sauvages, touche d'épices douces.",
+                    color: "#5c1322",
+                    height: "65%",
+                    glass: "rounded-b-full",
+                    clip: "polygon(0 0, 100% 0, 80% 100%, 20% 100%)",
+                    garnish: "orange"
+                },
+                activities: [
+                    { title: "Atelier Eau de Fleur d'Oranger", desc: "Distillation traditionnelle dans les alambics de Testour." },
+                    { title: "Dégustation Privée en Domaine", desc: "Accords verger, fromages locaux de brebis et mixologie." }
+                ]
+            },
+            2: {
+                title: "Cap Bon",
+                signature: "ACIDE – FLORAL – FRAIS",
+                subtitle: "Circuit 2",
+                desc: "Un itinéraire d'exception bordé par la Méditerranée, célébrant les champs de jasmin, la fraîcheur des agrumes sauvages, et l'excellence viticole millénaire tunisienne.",
+                price: "1,400",
+                stops: [
+                    { name: "Hammamet", details: "Cueillette des fleurs de jasmin et balade côtière parfumée." },
+                    { name: "Nabeul", details: "Art ancestral de la distillation de fleur d'oranger amère (Néroli)." },
+                    { name: "Korba & Caves", details: "Visite de vignobles bio exclusifs et accords mets-cocktails salins." }
+                ],
+                cocktail: {
+                    name: "Jasmin Sauvage",
+                    profile: "Profil: Floral, Frais, Citrique",
+                    ingredients: "Hydrolat de Jasmin bio distillé sous vide, gin artisanal infusé à la verveine, cordial de citron vert et nectar de raisin mûr.",
+                    color: "#f5d4a1",
+                    height: "80%",
+                    glass: "rounded-t-sm",
+                    clip: "polygon(10% 0%, 90% 0%, 75% 100%, 25% 100%)",
+                    garnish: "mint"
+                },
+                activities: [
+                    { title: "Cueillette de Jasmin à l'Aube", desc: "Apprenez l'extraction délicate des molécules olfactives." },
+                    { title: "Caves & Vignobles Marins", desc: "Dégustation et visites guidées avec des sommeliers locaux." }
+                ]
+            },
+            3: {
+                title: "Le Kef - Béja - Jendouba",
+                signature: "HERBACÉ – BOISÉ – BOTANIQUE",
+                subtitle: "Circuit 3",
+                desc: "Le Nord-Ouest tunisien déploie sa force tranquille entre montagnes brumeuses, forêts de chêne-liège, plantes aromatiques sauvages et miels forestiers uniques.",
+                price: "1,180",
+                stops: [
+                    { name: "Béja", details: "Exploration de la richesse romaine et des terroirs herbagers réputés." },
+                    { name: "Jendouba", details: "Aventures au cœur des forêts d'altitude et sources d'eau pures." },
+                    { name: "Le Kef", details: "Découverte des architectures andalouses, des contreforts rocheux et du mystique soufi." }
+                ],
+                cocktail: {
+                    name: "La Rosée des Maures",
+                    profile: "Profil: Herbacé, Résineux, Douceur Sauvage",
+                    ingredients: "Liqueur de Thibarine clarifiée, infusion de romarin frais et menthe sauvage des montagnes, sirop de miel de chêne-liège noir.",
+                    color: "#3e5c38",
+                    height: "75%",
+                    glass: "rounded-none",
+                    clip: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+                    garnish: "rosemary"
+                },
+                activities: [
+                    { title: "Safari Botanique Guidé", desc: "Identification et récolte de plantes aromatiques sauvages." },
+                    { title: "Atelier Miels de Forêt", desc: "Dégustation des variétés rares et méthodes de siroping complexe." }
+                ]
+            },
+            4: {
+                title: "Tozeur - Nefta",
+                signature: "SUCRÉ – RICHE – SOLAIRE",
+                subtitle: "Circuit 4",
+                desc: "Un retour aux sources du Sud saharien à l'ombre bienveillante des palmeraies géantes. Une ode aux dattes de qualité Deglet Nour, au safran du désert et à la douceur nomade.",
+                price: "1,650",
+                stops: [
+                    { name: "Tozeur", details: "Architecture de briques d'argile, immersion dans une palmeraie impériale." },
+                    { name: "Nefta", details: "Spiritualité saharienne, contemplation de la Corbeille de Nefta au couchant." },
+                    { name: "Dunes du Sahara", details: "Bivouac nomade et nuit sous un ciel étoilé pur." }
+                ],
+                cocktail: {
+                    name: "L'Or des Sables",
+                    profile: "Profil: Onctueux, Epicé, Riche",
+                    ingredients: "Sirop condensé de dattes Deglet Nour, caroube locale grillée, lait d'amande fraîche pressée, pointe de cardamome.",
+                    color: "#a35c2b",
+                    height: "90%",
+                    glass: "rounded-t-2xl",
+                    clip: "polygon(5% 0%, 95% 0%, 85% 95%, 15% 95%)",
+                    garnish: "date"
+                },
+                activities: [
+                    { title: "Cueillette & Sélection de Dattes", desc: "Apprendre les grades d'humidité de la Deglet Nour." },
+                    { title: "Cérémonie du Thé", desc: "Maîtriser les rituels de service sahariens et infusions de sable." }
+                ]
+            }
+        };
+
+        function switchCircuit(id) {
+            const data = circuitData[id];
+
+            // Switch active buttons
+            document.querySelectorAll('.circuit-btn').forEach(btn => {
+                btn.classList.remove('active', 'border-[#c3a267]');
+                const span = btn.querySelector('span');
+                if (span) {
+                    span.classList.remove('bg-[#5c1322]', 'text-white');
+                    span.classList.add('bg-[#5c1322]/20', 'text-stone-600');
+                }
+            });
+
+            const activeBtn = document.getElementById(`btn-circuit-${id}`);
+            activeBtn.classList.add('active', 'border-[#c3a267]');
+            const activeSpan = activeBtn.querySelector('span');
+            if (activeSpan) {
+                activeSpan.classList.add('bg-[#5c1322]', 'text-white');
+                activeSpan.classList.remove('bg-[#5c1322]/20', 'text-stone-600');
+            }
+
+            // Mobile scroll-to-view helper
+            activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+            const card = document.getElementById('circuit-card');
+            card.classList.add('opacity-40', 'scale-[0.99]');
+
+            setTimeout(() => {
+                document.getElementById('circuit-signature').innerText = data.signature;
+                document.getElementById('circuit-title').innerText = data.title;
+                document.getElementById('circuit-subtitle').innerText = data.subtitle;
+                document.getElementById('circuit-desc').innerText = data.desc;
+                document.getElementById('circuit-price').innerText = data.price;
+
+                // Set Stops
+                const stopsContainer = document.getElementById('circuit-stops');
+                stopsContainer.innerHTML = '';
+                data.stops.forEach((stop, index) => {
+                    const stopEl = document.createElement('div');
+                    stopEl.classList.add('relative');
+                    stopEl.innerHTML = `
+                        <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full ${index === 0 ? 'bg-[#5c1322]' : 'bg-[#c3a267]'} border-4 border-white"></span>
+                        <h5 class="font-bold text-xs text-stone-800 uppercase tracking-wider">${stop.name}</h5>
+                        <p class="text-[10px] md:text-[11px] text-stone-500">${stop.details}</p>
+                    `;
+                    stopsContainer.appendChild(stopEl);
+                });
+
+                // Update Cocktail Art and Details
+                document.getElementById('cocktail-name').innerText = data.cocktail.name;
+                document.getElementById('cocktail-flavor-profile').innerText = data.cocktail.profile;
+                document.getElementById('cocktail-ingredients').innerText = data.cocktail.ingredients;
+
+                const artContainer = document.getElementById('cocktail-art-container');
+                let garnishHtml = '';
+                if (data.cocktail.garnish === 'orange') {
+                    garnishHtml = `<div class="absolute top-10 right-2 w-6 h-6 rounded-full border-2 border-amber-500 bg-amber-400/50 transform rotate-45 overflow-hidden flex items-center justify-center">
+                        <div class="w-full h-0.5 bg-amber-600"></div>
+                    </div>`;
+                } else if (data.cocktail.garnish === 'mint') {
+                    garnishHtml = `<div class="absolute top-8 right-3 w-3 h-5 bg-emerald-600 rounded-tr-full rounded-bl-full transform -rotate-12"></div>
+                                   <div class="absolute top-9 right-2 w-3 h-5 bg-emerald-500 rounded-tl-full rounded-br-full transform rotate-45"></div>`;
+                } else if (data.cocktail.garnish === 'rosemary') {
+                    garnishHtml = `<div class="absolute -top-3 right-5 w-1 h-16 bg-emerald-800 rounded-full transform rotate-12 flex flex-col justify-between p-0.5">
+                        <div class="w-full h-1 bg-emerald-600"></div>
+                    </div>`;
+                } else if (data.cocktail.garnish === 'date') {
+                    garnishHtml = `<div class="absolute top-6 right-2.5 w-3.5 h-7 bg-amber-900 rounded-full transform rotate-45 border border-amber-950 flex items-center justify-center">
+                        <div class="w-1 h-5 bg-yellow-600/30"></div>
+                    </div>`;
+                }
+
+                artContainer.innerHTML = `
+                    <div class="relative w-full h-full flex flex-col items-center justify-end">
+                        <div class="w-20 h-20 ${data.cocktail.glass} border-t border-[#c3a267] relative overflow-hidden flex items-end justify-center bg-stone-50" style="clip-path: ${data.cocktail.clip};">
+                            <div class="w-full" style="height: ${data.cocktail.height}; background-color: ${data.cocktail.color};"></div>
+                            <div class="absolute bottom-1 left-5 w-6 h-6 bg-white/20 border border-white/30 rounded transform rotate-12"></div>
+                        </div>
+                        <div class="w-1.5 h-10 bg-[#c3a267]"></div>
+                        <div class="w-12 h-1 bg-[#c3a267] rounded-full"></div>
+                        ${garnishHtml}
+                    </div>
+                `;
+
+                // Set Highlights
+                const expContainer = document.getElementById('experience-highlights');
+                expContainer.innerHTML = '';
+                data.activities.forEach(act => {
+                    const actEl = document.createElement('div');
+                    actEl.className = 'flex gap-2.5 items-start p-2.5 rounded-xl hover:bg-[#faf6f0] transition-colors';
+                    actEl.innerHTML = `
+                        <span class="text-[#c3a267] shrink-0 mt-0.5"><i data-lucide="check-circle-2" class="w-4 h-4"></i></span>
+                        <div>
+                            <h6 class="font-bold text-xs text-stone-800 uppercase tracking-wider leading-tight">${act.title}</h6>
+                            <p class="text-[10px] text-stone-500 mt-0.5">${act.desc}</p>
+                        </div>
+                    `;
+                    expContainer.appendChild(actEl);
+                });
+
+                // Instantly re-render new icons
+                lucide.createIcons();
+                card.classList.remove('opacity-40', 'scale-[0.99]');
+            }, 200);
+        }
+    </script>
+</body>
+</html>
